@@ -1,19 +1,17 @@
+require_relative '../utils'
+
 class VigenereCipher
   def initialize(key)
     @key = key
   end
 
   def encode(plaintext)
-    plaintext.chars.each_with_index.map do |char, i|
-      transform(char, @key[i % @key.size])
-    end.join
+    Utils.stream_cipher(plaintext) do |char, i|
+      chr((ord(char) + ord(@key[i % @key.size])) % 26)
+    end
   end
 
   private
-
-  def transform(char, base)
-    chr((ord(char) + ord(base)) % 26)
-  end
 
   def ord(char)
     char.ord - 'a'.ord

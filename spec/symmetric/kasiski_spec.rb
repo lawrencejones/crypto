@@ -1,11 +1,11 @@
 require 'rspec'
-require_relative './kasiski.rb'
+require_relative '../../lib/symmetric/kasiski'
 
 RSpec.describe(Kasiski) do
   subject(:kasiski) { described_class.new(cipher_text) }
 
   # Uses a Vigenere cipher with key 'crypto'
-  let(:cipher_text)  { File.read('./vigenere_cipher_text.fixture') }
+  let(:cipher_text)  { load_fixture('sample.vigenere.encrypted') }
 
   describe('.key_size') do
     it 'guesses key size of cipher used' do
