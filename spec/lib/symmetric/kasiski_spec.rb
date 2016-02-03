@@ -1,6 +1,5 @@
-require 'rspec'
-require_relative '../../lib/symmetric/kasiski'
-require_relative '../../lib/symmetric/vigenere_cipher'
+require 'symmetric/kasiski'
+require 'symmetric/vigenere_cipher'
 
 RSpec.describe(Kasiski) do
   subject(:kasiski) { described_class.new(cipher_text) }

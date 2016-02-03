@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative '../../lib/symmetric/vigenere_cipher'
+require 'symmetric/vigenere_cipher'
 
 RSpec.describe(VigenereCipher) do
   subject(:cipher) { described_class.new(key) }

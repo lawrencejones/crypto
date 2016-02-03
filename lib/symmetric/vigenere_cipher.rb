@@ -1,5 +1,6 @@
 require_relative '../utils'
 
+# Implements a standard Vigenere cipher for operation on lowercase alphanumeric plain text
 class VigenereCipher
   def initialize(key)
     @key = key

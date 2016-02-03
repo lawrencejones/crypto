@@ -1,5 +1,6 @@
 require 'set'
 
+# Shared utility functions
 module Utils
   def self.stream_cipher(text, &cipher)
     count = 0

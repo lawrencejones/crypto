@@ -1,6 +1,8 @@
 require 'set'
 require 'active_support/core_ext/hash'
 
+# Implements a method of statistically analysing a cipher text to infer the size of the
+# key used for a symmetric shift cipher.
 class Kasiski
   def initialize(cipher_text)
     @cipher_text = cipher_text
@@ -36,7 +38,7 @@ class Kasiski
 
         y << intervals
       end
-      raise StopIteration
+      fail StopIteration
     end
   end
 
@@ -46,7 +48,7 @@ class Kasiski
     shared_divisors = possible_gcds(*possible_gcds(*intervals))
 
     frequency_distribution(shared_divisors).tap do |counts|
-      return normalize(counts).max_by { |k, v| v }
+      return normalize(counts).max_by { |_k, v| v }
     end
   end
 
@@ -85,6 +87,6 @@ class Kasiski
   end
 
   def count_hash
-    Hash.new.tap { |h| h.default = 0 }
+    {}.tap { |h| h.default = 0 }
   end
 end
