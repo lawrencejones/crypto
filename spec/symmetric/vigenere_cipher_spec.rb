@@ -3,7 +3,7 @@ require_relative '../../lib/symmetric/vigenere_cipher'
 
 RSpec.describe(VigenereCipher) do
   subject(:cipher) { described_class.new(key) }
-  let(:key) { 'sesame' }
+  let(:key) { 'crypto' }
 
   # Uses a Vigenere cipher with key 'crypto'
   let(:plain_text) { load_fixture('sample.vigenere.plaintext') }
@@ -12,7 +12,7 @@ RSpec.describe(VigenereCipher) do
   describe('.encode') do
     it 'generates ciphertext' do
       expect(cipher.encode('thisisatestmessage')).
-        to eql('llasuwsxwsfqwwkasi')
+        to eql('vyghbgckchmagjqpzs')
     end
 
     it 'encodes fixture' do

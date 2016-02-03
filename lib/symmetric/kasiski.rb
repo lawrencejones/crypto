@@ -17,6 +17,7 @@ class Kasiski
 
   def compute_key_size
     intervals = Set.new
+    best_guess = nil
 
     common_ngrams(2).each do |(gram, _)|
       indexes = indexes_of(gram)
@@ -28,6 +29,8 @@ class Kasiski
       best_guess, p = gcd_probability(*intervals).max_by { |k, v| v }
       return best_guess if p > 0.5
     end
+
+    best_guess
   end
 
   def indexes_of(substring)
@@ -37,22 +40,19 @@ class Kasiski
   end
 
   def gcd_probability(*ns)
-    sample_space = ns.size * (ns.size - 1)
     ns.product(ns).
       map { |(n, m)| n.gcd(m) unless n == m }.
       compact.
-      each_with_object(count_hash) do |gcd, counts|
-        counts[gcd] += 1
-      end.transform_values { |count| count.to_f / sample_space }
+      each_with_object(count_hash) { |gcd, counts| counts[gcd] += 1 }.
+      except(1).
+      transform_values { |count| count.to_f / (ns.size * (ns.size - 1)) }
   end
 
   def common_ngrams(n)
     cipher_text.
       split.
       select { |word| word.size == n }.
-      each_with_object(count_hash) do |ngram, counts|
-        counts[ngram] += 1
-      end.
+      each_with_object(count_hash) { |ngram, counts| counts[ngram] += 1 }.
       sort_by { |_, count| -count }
   end
 
