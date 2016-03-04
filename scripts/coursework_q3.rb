@@ -6,7 +6,7 @@ def hash(m)
 end
 
 seed = 'CO409CryptographyEngineeringRunsNowForItsSecondYear'
-no_of_workers = 8
+no_of_workers = 4
 
 pids = (1..no_of_workers).map do |worker_no|
   Process.fork do
