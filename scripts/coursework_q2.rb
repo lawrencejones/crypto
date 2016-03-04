@@ -11,7 +11,7 @@ def create_keypair(group)
 
   {
     private: private_key,
-    public: group.generator.multiply_by_scalar(private_key)
+    public: group.generator.multiply_by_scalar(private_key),
   }
 end
 
@@ -37,6 +37,4 @@ point_field = ECDSA::PrimeField.new(group.order)
 
 numerator = point_field.mod(normalize(h1, group) - normalize(h2, group))
 
-require 'pry'; binding.pry
-
-
+puts(numerator: numerator, s1: s1, s2: s2)
