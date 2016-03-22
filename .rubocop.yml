@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'node_modules/**/*'
     - 'vendor/**/*'
+  TargetRubyVersion: 2.2
 
 LineLength:
   Max: 90
